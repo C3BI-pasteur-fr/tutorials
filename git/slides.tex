@@ -89,12 +89,26 @@
 }
 
 
+%% section ------------------------------------------------
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
 %% Set up title ----------------------------------------------------------------
 
-\title{Snakemake Presentation}
-\author[D.Desvillechabrol \& T.Cokelaer]{Dimitri Desvillechabrol and Thomas Cokelaer}
+\title{GIT tutorial}
+\author[F. Lemoine, A. Zhukova, D.Desvillechabrol \& T.Cokelaer]{Frédéric
+Lemoine, Anna Zhukova, Dimitri Desvillechabrol and Thomas Cokelaer}
 \institute{Institut Pasteur}
-\date{March 22 2016}
+\date{April 2016}
 
 \begin{document}
 
@@ -128,5 +142,9 @@
 \section{Advanced git}
 % More advanced usage
 \input{advanced_git}
+
+\section{Practical work (advanced)}
+% hands on 
+\input{practical_work_advanced}
 
 \end{document}
