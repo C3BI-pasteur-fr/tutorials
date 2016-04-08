@@ -12,7 +12,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Step 0. Configuration}
+\begin{frame}[fragile]{Configuration}
 	\begin{lstlisting}
 $ git config --global user.name "First Last"
 $ git config --global user.email "email@example.com"
@@ -22,7 +22,7 @@ $ git config --global color.branch "auto"
 	\end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Step 1. Create/Clone a repository}
+\begin{frame}[fragile]{Create/Clone a repository}
 	\begin{lstlisting}
 $ # Clone a remote repository
 $ git clone https://github.com/C3BI-pasteur-fr/tutorials.git |\pause|
@@ -32,7 +32,7 @@ $ git init
 	\end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Step 2. Writing a new feature/bug fix}
+\begin{frame}[fragile]{Write a new feature/bug fix}
 	\begin{enumerate}
 		\item Create a new branch
 		\item Implement a new feature/Fix a bug
@@ -48,7 +48,7 @@ $ git init
 	\end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{Step 2.1 Create a new branch}
+\begin{frame}[fragile]{Step 1. Create a new branch locally}
 	\begin{lstlisting}
 $ # Which branches do we have?
 $ git branch -a |\pause|
@@ -68,7 +68,7 @@ Switched to a new branch "feature"
   	\end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Step 2.2 Implement a new feature/Fix a bug}
+\begin{frame}[fragile]{Step 2. Implement a new feature/Fix a bug}
   	\begin{lstlisting}
 $ # Add files to index
 $ git add main.py __init__.py |\pause|
@@ -97,20 +97,8 @@ $ git commit -m "Fixed TSS positions on - strand"
   	\end{lstlisting}
 \end{frame}
 
-%\begin{frame}[fragile]{Step 2.3 Push to origin}
-%  	\begin{lstlisting}
-%# Push to the remote repository (origin)
-%# from local branch feature
-%# to the remote branch feature (and creating it)
-%$ git push origin feature:feature |\pause|
-%
-%$ # From now on, we can push by...
-%$ git push origin feature
-%	\end{lstlisting}
-%\end{frame}
 
-
-\begin{frame}[fragile]{Step 2.3 Merge the branch into master}
+\begin{frame}[fragile]{Step 3. Merge the branch into master}
   	\begin{lstlisting}
 # Switch to master
 $ git checkout master
@@ -124,16 +112,111 @@ Fast-forwarded master to feature.
 	\end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Step 2.4 Remove the branch}
+\begin{frame}[fragile]{Step 4. Remove the branch}
   	\begin{lstlisting}
-# Remove local branch
+$ # Remove local branch
+$ git branch -d feature
+Deleted branch feature (was fd86490). |\pause|
+	\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{The scenario we've just seen}
+	\begin{enumerate}
+		\item Created a new branch \textbf{locally}
+		\item Implemented a new feature/Fixed a bug
+		\begin{enumerate}
+			\item Step 1 towards new feature/bug fix
+			\item Commit
+			\item Step 2 towards new feature/bug fix
+			\item Commit
+			\item \ldots
+		\end{enumerate}
+		\item Mergeed this branch into master \textbf{locally}
+		\item Deleted this branch \textbf{locally} (it never existed elsewhere)
+		\pause
+		\item Push changes to the remote server (origin)
+		\begin{lstlisting}
+		$ git push origin master
+		\end{lstlisting}
+	\end{enumerate}
+	\pause
+	\textit{What if I am not the only one working on this feature/bug?}
+\end{frame}
+
+\begin{frame}[fragile]{Publishing the branch on origin}
+	\begin{lstlisting}
+$ # Push our branch feature to a new branch feature (will be create) on origin
+$ git push origin feature:feature |\pause|
+
+$ # From now on, push (commited) changes
+$ git push origin feature |\pause|
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Getting updates from origin}
+	\begin{lstlisting}
+$ # Pull updates from origin
+$ git pull |\pause|
+     ...
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details.
+
+    git pull <remote> <branch> |\pause|
+    
+$ # Pull (what?) branch feature (from where?) from origin
+$ git pull origin feature |\pause|
+
+$ # You can also update config...
+$ # (from where?)
+$ git config branch.feature.remote origin
+$ # (what?)
+$ git config branch.feature.merge feature
+
+$ # ...so that from now on you can pull just by
+$ git pull
+	\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Joining someone else's branch}
+	\begin{lstlisting}
+$ git checkout --track -b bug origin/bug
+Branch bug set up to track remote branch refs/remotes/origin/bug.
+Switched to a new branch "bug"
+	\end{lstlisting}
+	
+	\pause
+	\begin{small}
+	{\color{eclipsePurple} Beware:} A simple pull would have merged the changes from remote \textit{bug} into our local master!
+\end{small}
+\end{frame}
+
+\begin{frame}[fragile]{Merge the branch into master}
+  	\begin{lstlisting}
+$ git checkout master
+Switched to branch "master" |\pause|
+$ git merge feature |\pause|
+
+$ # Note that if the feature only existed locally, 
+$ # we could have used rebase instead of merge:
+$ git rebase feature
+	\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Step 4. Remove the branch}
+  	\begin{lstlisting}
+$ # Remove local branch feature
 $ git branch -d feature
 Deleted branch feature (was fd86490). |\pause|
 
 
-$ # Remove remote feature
+$ # Remove remote branch feature
 $ git push origin :feature
 - [deleted] feature
 	\end{lstlisting}
 \end{frame}
+
 
