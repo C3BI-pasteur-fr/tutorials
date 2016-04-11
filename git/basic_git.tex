@@ -57,12 +57,13 @@ remotes/origin/HEAD -> origin/master
 remotes/origin/master
 remotes/origin/services |\pause|
 
-$ # Create a branch for our feature/bug fix 
+$ # Create a branch for our feature/bug fix...
 $ git branch feature
+$ # ... and switch to this branch
 $ git checkout feature 
 Switched to a new branch "feature" |\pause|
 
-$ # or create a branch for our feature/bug fix (shorter version)
+$ # or create + switch in one command
 $ git checkout -b feature 
 Switched to a new branch "feature"
   	\end{lstlisting}
@@ -70,7 +71,7 @@ Switched to a new branch "feature"
 
 \begin{frame}[fragile]{Step 2. Implement a new feature/Fix a bug}
   	\begin{lstlisting}
-$ # Add files to index
+$ # Add files to index (to-be-committed)
 $ git add main.py __init__.py |\pause|
 
 $ # Remove files from index
@@ -90,7 +91,7 @@ Changes not staged for commit:
 
 	modified:   __init__.py |\pause|
 
-$ # Commit
+$ # Commit (in our local repository!)
 $ git commit -m "Fixed TSS positions on - strand"
 [feature fd07832] Fixed TSS positions on - strand
  1 file changed, 1 insertion(+)
@@ -105,7 +106,7 @@ $ git checkout master
 Switched to branch 'master' |\pause|
 
 
-$ # Merge our local branch into master
+$ # Reapply our commits on the master branch
 $ git rebase feature
 First, rewinding head to replay your work on top of it...
 Fast-forwarded master to feature.
@@ -132,7 +133,7 @@ Deleted branch feature (was fd86490). |\pause|
 			\item Commit
 			\item \ldots
 		\end{enumerate}
-		\item Mergeed this branch into master \textbf{locally}
+		\item Applied the commits from this branch on the master \textbf{locally}
 		\item Deleted this branch \textbf{locally} (it never existed elsewhere)
 		\pause
 		\item Push changes to the remote server (origin)
@@ -146,10 +147,10 @@ Deleted branch feature (was fd86490). |\pause|
 
 \begin{frame}[fragile]{Publishing the branch on origin}
 	\begin{lstlisting}
-$ # Push our branch feature to a new branch feature (will be create) on origin
+$ # Push our branch 'feature' to a new branch 'feature' (will be created) on origin
 $ git push origin feature:feature |\pause|
 
-$ # From now on, push (commited) changes
+$ # From now on, to push (committed) changes we can...
 $ git push origin feature |\pause|
 	\end{lstlisting}
 \end{frame}
@@ -168,13 +169,13 @@ See git-pull(1) for details.
 $ # Pull (what?) branch feature (from where?) from origin
 $ git pull origin feature |\pause|
 
-$ # You can also update config...
+$ # We can also update config...
 $ # (from where?)
 $ git config branch.feature.remote origin
 $ # (what?)
 $ git config branch.feature.merge feature
 
-$ # ...so that from now on you can pull just by
+$ # ...so that from now on, we can pull just by...
 $ git pull
 	\end{lstlisting}
 \end{frame}
@@ -188,9 +189,9 @@ Switched to a new branch "bug"
 	\end{lstlisting}
 	
 	\pause
-	\begin{small}
-	{\color{eclipsePurple} Beware:} A simple pull would have merged the changes from remote \textit{bug} into our local master!
-\end{small}
+	\begin{tiny}
+	{\color{eclipsePurple} Beware:} \textit{pull origin bug} would have merged the changes from the remote branch \textit{bug} into our current local branch!
+\end{tiny}
 \end{frame}
 
 \begin{frame}[fragile]{Merge the branch into master}
