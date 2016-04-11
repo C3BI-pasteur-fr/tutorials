@@ -1,3 +1,6 @@
+\definecolor{git}{RGB}{172, 49, 49}
+\def\git#1{{\small\color{git}\$ git #1}\\}
+
 \begin{frame}
     \begin{itemize}
         \item clone
@@ -9,4 +12,128 @@
     \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]{Step 0. Configuration}
+	\begin{lstlisting}
+$ git config --global user.name "First Last"
+$ git config --global user.email "email@example.com"
+$ git config --global color.diff "auto"
+$ git config --global color.status "auto"
+$ git config --global color.branch "auto"
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Step 1. Create/Clone a repository}
+	\begin{lstlisting}
+$ # Clone a remote repository
+$ git clone https://github.com/C3BI-pasteur-fr/tutorials.git |\pause|
+
+$ # or create a local repository in the current folder
+$ git init
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Step 2. Writing a new feature/bug fix}
+	\begin{enumerate}
+		\item Create a new branch
+		\item Implement a new feature/Fix a bug
+		\begin{enumerate}
+			\item Step 1 towards new feature/bug fix
+			\item Commit
+			\item Step 2 towards new feature/bug fix
+			\item Commit
+			\item \ldots
+		\end{enumerate}
+		\item Merge this branch into master
+		\item Delete this branch 
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Step 2.1 Create a new branch}
+	\begin{lstlisting}
+$ # Which branches do we have?
+$ git branch -a |\pause|
+* master
+remotes/origin/HEAD -> origin/master
+remotes/origin/master
+remotes/origin/services |\pause|
+
+$ # Create a branch for our feature/bug fix 
+$ git branch feature
+$ git checkout feature 
+Switched to a new branch "feature" |\pause|
+
+$ # or create a branch for our feature/bug fix (shorter version)
+$ git checkout -b feature 
+Switched to a new branch "feature"
+  	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Step 2.2 Implement a new feature/Fix a bug}
+  	\begin{lstlisting}
+$ # Add files to index
+$ git add main.py __init__.py |\pause|
+
+$ # Remove files from index
+$ git reset HEAD __init__.py |\pause|
+
+$ # Look at current index state
+$ git status
+On branch feature
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	modified:   main.py
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   __init__.py |\pause|
+
+$ # Commit
+$ git commit -m "Fixed TSS positions on - strand"
+[feature fd07832] Fixed TSS positions on - strand
+ 1 file changed, 1 insertion(+)
+  	\end{lstlisting}
+\end{frame}
+
+%\begin{frame}[fragile]{Step 2.3 Push to origin}
+%  	\begin{lstlisting}
+%# Push to the remote repository (origin)
+%# from local branch feature
+%# to the remote branch feature (and creating it)
+%$ git push origin feature:feature |\pause|
+%
+%$ # From now on, we can push by...
+%$ git push origin feature
+%	\end{lstlisting}
+%\end{frame}
+
+
+\begin{frame}[fragile]{Step 2.3 Merge the branch into master}
+  	\begin{lstlisting}
+# Switch to master
+$ git checkout master
+Switched to branch 'master' |\pause|
+
+
+$ # Merge our local branch into master
+$ git rebase feature
+First, rewinding head to replay your work on top of it...
+Fast-forwarded master to feature.
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Step 2.4 Remove the branch}
+  	\begin{lstlisting}
+# Remove local branch
+$ git branch -d feature
+Deleted branch feature (was fd86490). |\pause|
+
+
+$ # Remove remote feature
+$ git push origin :feature
+- [deleted] feature
+	\end{lstlisting}
+\end{frame}
 

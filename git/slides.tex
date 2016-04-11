@@ -51,10 +51,10 @@
 {
   \leavevmode%
   \hbox{%
-  \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
     \usebeamerfont{author in head/foot}\insertshortauthor
   \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.7\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
     \usebeamerfont{title in head/foot}\insertshorttitle\hspace*{3em}
     \insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
   \end{beamercolorbox}}%
@@ -78,14 +78,15 @@
 \definecolor{eclipseGreen}{RGB}{63,127,95}
 \definecolor{eclipsePurple}{RGB}{127,0,85}
 
-\lstset{language=Python}
+\lstset{language=bash}
 \lstset{
     basicstyle=\tiny\ttfamily,
-    morekeywords={rule, output, shell, params, run, configfile, temp, threads, log},
+    %morekeywords={git, init, push, pull, branch, merge, status, log, clone},
     showstringspaces=false,
     commentstyle=\color{eclipseGreen}, % style of comments
     keywordstyle=\color{eclipsePurple}, % style of keywords
     stringstyle=\color{eclipseBlue}, % style of strings
+    escapeinside=|| % escape symbol for latex inside lstlisting
 }
 
 
