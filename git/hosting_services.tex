@@ -64,8 +64,9 @@
   \begin{lstlisting}
     $ cat > myfristfile.pl
     while(<>){
+      chomp;
       my @tab = split(/\t/);
-      $tab[1]=s/[acgt]/ACGT/g;
+      $tab[1]=~tr/acgt/ACGT/;
       print ">".$tab[0]."\n";
       print $tab[1]."\n";
     }
@@ -105,9 +106,10 @@
       while(<>){
         my @tab = split(/\t/);
         -  $tab[1]=s/[acgt]/ACGT/g;
-        +  $tab[1]=s/[acgtu]/ACGTU/g;
-        print ``>''.$tab[0].''\n'';
-        print $tab[1].''\n'';
+        -  $tab[1]=~tr/acgt/ACGT/;
+        +  $tab[1]=~tr/acgtu/ACGTU/;
+        print ">".$tab[0]."\n";
+        print $tab[1]."\n";
       }
       $ git add myfristfile.pl
       $ git commit -m "Modification of nucleotides"
@@ -159,11 +161,58 @@
   \end{itemize}
 \end{frame}
 
-
 \begin{frame}[fragile]{GitHub: Use Case - After merging}
   \begin{itemize}
   \item Network of branches
     \includegraphics[width=\textwidth]{images/hosting_services_use_case_9.png}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{GitHub: Use Case - Tesing!}
+  \begin{itemize}
+  \item<1-> Is my code buggy?
+  \item<2-> I want to test my code!
+  \item<3-> \includegraphics[width=15px]{images/Travis_CI_Logo.png} Tavis CI
+  \item<4-> Just write a YML file \verb+.tavis-ci.yml+
+    \begin{lstlisting}
+      language: perl
+      perl:
+      - "5.22"
+      - "5.20"
+      - "5.18"
+      - "5.16"
+      - "5.14"
+      before_install: true
+      install: true
+      before_script: true
+      script:
+      - echo -e "SEQ1\tacgt\tcol2\tcol3" | perl myfristfile.pl
+    \end{lstlisting}
+  \item<5-> Then
+    \begin{lstlisting}
+      $ git add .travis-ci.yml
+      $ git commit -m "Travis CI"
+      $ git push
+    \end{lstlisting}
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Travis CI}
+  \begin{itemize}
+  \item After each push on GitHub, a Travis CI build is triggered automatically
+  \item After the build, the result is sent by e-mail
+  \item Web interface
+    \includegraphics[width=0.8\textwidth]{images/hosting_services_use_case_10.png}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Travis CI}
+  \begin{itemize}
+  \item Result logs
+    \includegraphics[width=0.8\textwidth]{images/hosting_services_use_case_11.png}
   \end{itemize}
 \end{frame}
 
