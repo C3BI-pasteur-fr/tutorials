@@ -43,7 +43,7 @@ $ git init
 			\item Commit
 			\item \ldots
 		\end{enumerate}
-		\item Merge this branch into master
+		\item Update the master
 		\item Delete this branch 
 	\end{enumerate}
 \end{frame}
@@ -99,7 +99,7 @@ $ git commit -m "Fixed TSS positions on - strand"
 \end{frame}
 
 
-\begin{frame}[fragile]{Step 3. Merge the branch into master}
+\begin{frame}[fragile]{Step 3. Update the master}
   	\begin{lstlisting}
 # Switch to master
 $ git checkout master
@@ -133,7 +133,7 @@ Deleted branch feature (was fd86490). |\pause|
 			\item Commit
 			\item \ldots
 		\end{enumerate}
-		\item Applied the commits from this branch on the master \textbf{locally}
+		\item \textbf{Reapplied} the commits from this branch on the master \textbf{locally}
 		\item Deleted this branch \textbf{locally} (it never existed elsewhere)
 		\pause
 		\item Push changes to the remote server (origin)
@@ -194,7 +194,7 @@ Switched to a new branch "bug"
 \end{tiny}
 \end{frame}
 
-\begin{frame}[fragile]{Merge the branch into master}
+\begin{frame}[fragile]{Update the master}
   	\begin{lstlisting}
 $ git checkout master
 Switched to branch "master" |\pause|
@@ -207,7 +207,7 @@ $ git rebase feature
 \end{frame}
 
 
-\begin{frame}[fragile]{Step 4. Remove the branch}
+\begin{frame}[fragile]{Remove the branch}
   	\begin{lstlisting}
 $ # Remove local branch feature
 $ git branch -d feature
@@ -221,3 +221,26 @@ $ git push origin :feature
 \end{frame}
 
 
+\begin{frame}[fragile]{The scenario we've just seen}
+	\begin{enumerate}
+		\item Created a new branch locally \textbf{and published it on the remote origin}
+		\item Implemented a new feature/Fixed a bug
+		\begin{enumerate}
+			\item Step 1 towards new feature/bug fix
+			\item Commit \textbf{(and maybe push to origin)}
+			\item \ldots
+			\item \textbf{Pull other developers' changes from origin}
+			\item \ldots
+		\end{enumerate}
+		\item \textbf{Merged} this branch with the master \textbf{locally}
+		\item \textbf{Pushed changes to origin}
+		\item Deleted this branch locally \textbf{and on origin}
+	\end{enumerate}
+	\pause
+	\textit{What if I want to work in several branches in parallel?}
+\end{frame}
+
+\begin{frame}[fragile]{Working in several branches in parallel}
+	\begin{tiny}
+	\end{tiny}
+\end{frame}
