@@ -1,17 +1,3 @@
-\definecolor{git}{RGB}{172, 49, 49}
-\def\git#1{{\small\color{git}\$ git #1}\\}
-
-\begin{frame}
-    \begin{itemize}
-        \item clone
-        \item  checkout
-        \item  add
-        \item commit
-        \item push
-        \item pull
-    \end{itemize}
-\end{frame}
-
 \begin{frame}[fragile]{Configuration}
 	\begin{lstlisting}
 $ git config --global user.name "First Last"
@@ -298,3 +284,37 @@ Dropped stash@{1} (739c015cafdc37e22a45d97868c3d03bc940eadf)
 	\end{tiny}
 \end{frame}
 
+\begin{frame}{Summary}
+	\begin{tiny}
+    \begin{itemize}
+        \item[] {\color{eclipseBlue}git init} -- create an empty repository
+        \item[] {\color{eclipseBlue}git clone <repository>} -- clone a repository into a new directory
+        \item[]
+        \item[] {\color{eclipseBlue}git branch -a} -- list existing branches
+        \item[] {\color{eclipseBlue}git branch <branch>} -- create a branch
+        \item[] {\color{eclipseBlue}git checkout <branch>} -- switch to the branch 
+        \item[]
+        \item[] {\color{eclipseBlue}git status} -- show the working tree status
+        \item[] {\color{eclipseBlue}git add <filepath>} -- add a file to the index (to be committed)
+        \item[] {\color{eclipseBlue}git commit -m <message>} -- record changes to the local repository
+        \item[]
+        \item[] {\color{eclipseBlue}git pull <from where?> <which branch?>} -- fetch and integrate changes
+        \item[] {\color{eclipseBlue}git push <where?> <to which branch?>} -- push the changes the remote repository
+        \item[]
+        \item[] {\color{eclipseBlue}git merge <branch>} -- merge the selected branch into the current branch
+        \item[] {\color{eclipseBlue}git rebase <branch>} -- reapply commits from the branch on top of the current branch
+        \item[]
+        \item[] {\color{eclipseBlue}git stash} -- record the current state of the working directory and the index, and clean the working directory
+        \item[] {\color{eclipseBlue}git stash list} -- list the stashes that currently exist
+        \item[] {\color{eclipseBlue}git stash apply <stash>} -- return to the state recorded in this stash
+        \item[]
+        \item[] {\color{eclipseBlue}git log [-{}-graph]} -- see commit logs
+        \item[]
+        \item[] {\color{eclipseBlue}git config [-{}-global] <key> <value>} -- set config option
+    \end{itemize}
+    
+    \begin{center}
+    	Detailed docs: \url{https://git-scm.com/docs}
+    \end{center}
+    \end{tiny}
+\end{frame}
