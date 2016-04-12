@@ -196,13 +196,21 @@ Switched to a new branch "bug"
 
 \begin{frame}[fragile]{Update the master}
   	\begin{lstlisting}
+$ # Switch to master
 $ git checkout master
 Switched to branch "master" |\pause|
+
+$ # Merge
 $ git merge feature |\pause|
+
 
 $ # Note that if the feature only existed locally, 
 $ # we could have used rebase instead of merge:
-$ git rebase feature
+$ git rebase feature |\pause|
+
+
+$ # Do not forget to push
+$ git push
 	\end{lstlisting}
 \end{frame}
 
