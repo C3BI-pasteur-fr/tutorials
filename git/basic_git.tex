@@ -12,7 +12,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Step 0. Configuration}
+\begin{frame}[fragile]{Configuration}
 	\begin{lstlisting}
 $ git config --global user.name "First Last"
 $ git config --global user.email "email@example.com"
@@ -22,7 +22,7 @@ $ git config --global color.branch "auto"
 	\end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Step 1. Create/Clone a repository}
+\begin{frame}[fragile]{Create/Clone a repository}
 	\begin{lstlisting}
 $ # Clone a remote repository
 $ git clone https://github.com/C3BI-pasteur-fr/tutorials.git |\pause|
@@ -32,7 +32,7 @@ $ git init
 	\end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Step 2. Writing a new feature/bug fix}
+\begin{frame}[fragile]{Write a new feature/bug fix}
 	\begin{enumerate}
 		\item Create a new branch
 		\item Implement a new feature/Fix a bug
@@ -43,12 +43,12 @@ $ git init
 			\item Commit
 			\item \ldots
 		\end{enumerate}
-		\item Merge this branch into master
+		\item Update the master
 		\item Delete this branch 
 	\end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{Step 2.1 Create a new branch}
+\begin{frame}[fragile]{Step 1. Create a new branch locally}
 	\begin{lstlisting}
 $ # Which branches do we have?
 $ git branch -a |\pause|
@@ -57,20 +57,21 @@ remotes/origin/HEAD -> origin/master
 remotes/origin/master
 remotes/origin/services |\pause|
 
-$ # Create a branch for our feature/bug fix 
+$ # Create a branch for our feature/bug fix...
 $ git branch feature
+$ # ... and switch to this branch
 $ git checkout feature 
 Switched to a new branch "feature" |\pause|
 
-$ # or create a branch for our feature/bug fix (shorter version)
+$ # or create + switch in one command
 $ git checkout -b feature 
 Switched to a new branch "feature"
   	\end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Step 2.2 Implement a new feature/Fix a bug}
+\begin{frame}[fragile]{Step 2. Implement a new feature/Fix a bug}
   	\begin{lstlisting}
-$ # Add files to index
+$ # Add files to index (to-be-committed)
 $ git add main.py __init__.py |\pause|
 
 $ # Remove files from index
@@ -90,50 +91,210 @@ Changes not staged for commit:
 
 	modified:   __init__.py |\pause|
 
-$ # Commit
+$ # Commit (in our local repository!)
 $ git commit -m "Fixed TSS positions on - strand"
 [feature fd07832] Fixed TSS positions on - strand
  1 file changed, 1 insertion(+)
   	\end{lstlisting}
 \end{frame}
 
-%\begin{frame}[fragile]{Step 2.3 Push to origin}
-%  	\begin{lstlisting}
-%# Push to the remote repository (origin)
-%# from local branch feature
-%# to the remote branch feature (and creating it)
-%$ git push origin feature:feature |\pause|
-%
-%$ # From now on, we can push by...
-%$ git push origin feature
-%	\end{lstlisting}
-%\end{frame}
 
-
-\begin{frame}[fragile]{Step 2.3 Merge the branch into master}
+\begin{frame}[fragile]{Step 3. Update the master}
   	\begin{lstlisting}
 # Switch to master
 $ git checkout master
 Switched to branch 'master' |\pause|
 
 
-$ # Merge our local branch into master
+$ # Reapply our commits on the master branch
 $ git rebase feature
 First, rewinding head to replay your work on top of it...
 Fast-forwarded master to feature.
 	\end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Step 2.4 Remove the branch}
+\begin{frame}[fragile]{Step 4. Remove the branch}
   	\begin{lstlisting}
-# Remove local branch
+$ # Remove local branch
+$ git branch -d feature
+Deleted branch feature (was fd86490). |\pause|
+	\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{The scenario we've just seen}
+	\begin{enumerate}
+		\item Created a new branch \textbf{locally}
+		\item Implemented a new feature/Fixed a bug
+		\begin{enumerate}
+			\item Step 1 towards new feature/bug fix
+			\item Commit
+			\item Step 2 towards new feature/bug fix
+			\item Commit
+			\item \ldots
+		\end{enumerate}
+		\item \textbf{Reapplied} the commits from this branch on the master \textbf{locally}
+		\item Deleted this branch \textbf{locally} (it never existed elsewhere)
+		\pause
+		\item Push changes to the remote server (origin)
+		\begin{lstlisting}
+		$ git push origin master
+		\end{lstlisting}
+	\end{enumerate}
+	\pause
+	\textit{What if I am not the only one working on this feature/bug?}
+\end{frame}
+
+\begin{frame}[fragile]{Publishing the branch on origin}
+	\begin{lstlisting}
+$ # Push our branch 'feature' to a new branch 'feature' (will be created) on origin
+$ git push origin feature:feature |\pause|
+
+$ # From now on, to push (committed) changes we can...
+$ git push origin feature |\pause|
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Getting updates from origin}
+	\begin{lstlisting}
+$ # Pull updates from origin
+$ git pull |\pause|
+     ...
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details.
+
+    git pull <remote> <branch> |\pause|
+    
+$ # Pull (what?) branch feature (from where?) from origin
+$ git pull origin feature |\pause|
+
+$ # We can also update config...
+$ # (from where?)
+$ git config branch.feature.remote origin
+$ # (what?)
+$ git config branch.feature.merge feature
+
+$ # ...so that from now on, we can pull just by...
+$ git pull
+	\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Joining someone else's branch}
+	\begin{lstlisting}
+$ git checkout --track -b bug origin/bug
+Branch bug set up to track remote branch refs/remotes/origin/bug.
+Switched to a new branch "bug"
+	\end{lstlisting}
+	
+	\pause
+	\begin{tiny}
+	{\color{eclipsePurple} Beware:} \textit{pull origin bug} would have merged the changes from the remote branch \textit{bug} into our current local branch!
+\end{tiny}
+\end{frame}
+
+\begin{frame}[fragile]{Update the master}
+  	\begin{lstlisting}
+$ # Switch to master
+$ git checkout master
+Switched to branch "master" |\pause|
+
+$ # Merge
+$ git merge feature |\pause|
+
+
+$ # Note that if the feature only existed locally, 
+$ # we could have used rebase instead of merge:
+$ git rebase feature |\pause|
+
+
+$ # Do not forget to push
+$ git push
+	\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Remove the branch}
+  	\begin{lstlisting}
+$ # Remove local branch feature
 $ git branch -d feature
 Deleted branch feature (was fd86490). |\pause|
 
 
-$ # Remove remote feature
+$ # Remove remote branch feature
 $ git push origin :feature
 - [deleted] feature
 	\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{The scenario we've just seen}
+	\begin{enumerate}
+		\item Created a new branch locally \textbf{and published it on the remote origin}
+		\item Implemented a new feature/Fixed a bug
+		\begin{enumerate}
+			\item Step 1 towards new feature/bug fix
+			\item Commit \textbf{(and maybe push to origin)}
+			\item \ldots
+			\item \textbf{Pull other developers' changes from origin}
+			\item \ldots
+		\end{enumerate}
+		\item \textbf{Merged} this branch with the master \textbf{locally}
+		\item \textbf{Pushed changes to origin}
+		\item Deleted this branch locally \textbf{and on origin}
+	\end{enumerate}
+	\pause
+	\textit{What if I want to work in several branches in parallel?}
+\end{frame}
+
+\begin{frame}[fragile]{Working in several branches in parallel}
+	\begin{tiny}
+		\begin{lstlisting}
+$ # On branch A: did some changes, but not yet ready to commit...
+$ # Want to switch to branch B. |\pause| Checkout?
+$ git checkout master
+error: Your local changes to the following files would be overwritten by checkout:
+	main/basic_git.tex
+Please, commit your changes or stash them before you can switch branches.
+Aborting |\pause|
+
+$ # Save the changes first.
+$ git stash
+Saved working directory and index state WIP on basic_git: 30fb6e8 Fixed typos
+HEAD is now at 30fb6e8 Fixed typos |\pause|
+
+$ # Now we can switch to another branch and work there...
+$ git checkout master
+Switched to branch 'master'
+$ ...
+		\end{lstlisting}
+	\end{tiny}
+\end{frame}
+
+\begin{frame}[fragile]{Working in several branches in parallel}
+	\begin{tiny}
+		\begin{lstlisting}
+$ # Back on branch A: How do I get my changes back?
+$ # Which stashes are there?
+$ git stash list
+stash@{0}: WIP on master: ceef0bd Merge pull request #1 from C3BI-pasteur-fr/services
+stash@{1}: WIP on basic_git: 30fb6e8 Fixed typos |\pause|
+
+$ # Apply the stash
+$ git stash apply stash@{1}
+On branch basic_git
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   basic_git.tex
+	... |\pause|
+	
+$ # Remove this stash from stash list
+$ git stash drop stash@{1}
+Dropped stash@{1} (739c015cafdc37e22a45d97868c3d03bc940eadf)
+		\end{lstlisting}
+	\end{tiny}
 \end{frame}
 
