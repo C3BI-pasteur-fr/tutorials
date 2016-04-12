@@ -5,39 +5,95 @@
 
 
 % ----------------------------------- slide
+
+
+% The image shows how people think. 
+% 1 - enthousiastic about Git
+% 2 - developers familiar to SVN who are happy with it
+% 3 - other developers who do not use VCS
 \begin{frame}
-\frametitle{What is GIT}
+\frametitle{Version Control System: from none to SVN to Git}
+\includegraphics[height=0.9\textheight, width=\textwidth]{images/comics_intro}
+\end{frame}
 
-Git is a version control system (VCS) and is the most widely used VCS today.
-%It can be used from a command line interface but is also integrated in many IDEs
-%(Integrated Development Environments).
 
-Most projects have moved from CVS or SVN to a Git, which is a idistributed VCS: 
-every developer's working copy is also a repository with the full history.
+\begin{frame}
+    \frametitle{Interest of Version Control System}
+        \begin{block}{Sounds familiar ?}
+    PI: \textit{Can you send me the script you used to generate this 
+    figure last year ? The one where you fixed the important bug ? }\\
+    \vspace{1em}
+    you (maybe): \textit{Well, I only backup the version before the bug fix 
+    and well you know ... but maybe it's in the dropbox in the directory 
+    weekly\_backup\_march\_2015\_version2\_before\_noon ?}
+        \end{block}
+    
+    \pause 
 
-\textbf{Add image to compare the two approaches.}
+    \begin{alertblock}{Well it's time to move on and use a VCS}
+        \begin{itemize}
+        \item History
+        \item Reproducibility
+        \item Backup 
+        \item Productive
+        \item Not just for you but foundation for a team to collaborate
+        \end{itemize}
+    \end{alertblock}
+\end{frame}
 
+%on but be aware: \textbf{once you use version control
+%tools, and any competent developers does, then they become a big part of your life !}
+
+
+\begin{frame}
+\frametitle{What is Version Control System anyway}
+\includegraphics[height=0.9\textheight, width=\textwidth]{images/distributed}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Which Version Control system shall I use ?}
+\pause
+\huge 
+\begin{center}
+GIT 
+\end{center}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Why Git 1/2 ?}
+\includegraphics[height=0.9\textheight, width=\textwidth]{images/vcs-plane}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Why Git 2/2 ?}
+
+\begin{itemize}
+\item Git is the most widely used VCS today. 
+\item Most projects have moved from SVN to a Git
+\item Every developer's working copy is also a repository with the full history
+(distributed VCS).
+\item Performance: faster than most of the concurrent \\
+\item Security: hashing algorithm checks integrity of the code against accidental and malicious change\\
+\item Flexible: support for various kinds of nonlinear development \textbf{branching}\\
+\end{itemize}
 \end{frame}
 
 
 % ----------------------------------- slide
 \begin{frame}
 \frametitle{Motivation}
-Three reasons to use Git:\\
-    Reproducibility (code version)\\
-    Collaborative\\
-    Profesional \\
+
+\begin{center}
+The question is not why shall I use Git but How do we use it ?
+\end{center}
+
+\begin{center}
+So let us start with some basics.
+\end{center}
+
 \end{frame}
-
-
-\begin{frame}
-\frametitle{Why}
-There are other tools so why Git ?\\
-
-Performance: faster than most of the concurrent \\
-Security: hashing algorithm checks integrity of the code against accidental and
-malicious change\\
-Flexible: support for various kinds of nonlinear development \textbf{branching}\\
-\end{frame}
-
 
