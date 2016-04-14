@@ -1,4 +1,7 @@
 \begin{frame}[fragile]{Configuration}
+
+Before starting to use git, you may want to configure it as follows:
+
 	\begin{lstlisting}
 $ git config --global user.name "First Last"
 $ git config --global user.email "email@example.com"
@@ -17,6 +20,47 @@ $ # or create a local repository in the current folder
 $ git init
 	\end{lstlisting}
 \end{frame}
+
+
+\begin{frame}
+include image showing again you, the local repo and the server ?
+\end{frame}
+
+
+\begin{frame}[fragile]{Add a new file on the remote repository}
+\begin{lstlisting}
+$ # create your file
+$ touch README.rst
+
+$ Check the status of your repo
+$ git status
+
+$ # add it to your local repository
+$ git add README.rst
+
+$ Check the status 
+$ git status
+
+$ # commit to your local repository
+$ git commit README.rst -m "Meaningful message"
+
+$ Check the status 
+$ git status
+
+$ # Send to the server for everybody
+$ git push 
+
+$ Check the status 
+$ git status
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}
+\includegraphics[height=0.9\textheight, width=\textwidth]{images/git_commit}
+\end{frame}
+
+
+\section{Working together: branching}
 
 \begin{frame}[fragile]{Write a new feature/bug fix}
 	\begin{enumerate}
