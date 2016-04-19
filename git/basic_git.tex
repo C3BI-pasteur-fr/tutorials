@@ -1,4 +1,5 @@
 \graphicspath{{images/}}
+
 \setbeamercovered{transparent=30}
 
 \begin{frame}[fragile]{The central and local repository}
@@ -113,8 +114,8 @@ $ git push
 
 %\section{Working together: branching}
 
-\begin{frame}
-\includegraphics[height=0.9\textheight, width=\textwidth]{gitflow}
+\begin{frame}{Everything is a branch!}
+	\includegraphics[height=0.9\textheight, width=\textwidth]{gitflow}
 \end{frame}
 
 \begin{frame}[fragile]{Implement a new feature/Fix a bug}
@@ -217,7 +218,6 @@ $ git commit -m "Fixed TSS positions on - strand"
 \end{columns}
 \end{frame}
 
-
 \begin{frame}[fragile]{Steps 3-4. Update the master and delete the branch}
 \begin{columns}
 	\begin{column}{0.6\textwidth}
@@ -264,9 +264,8 @@ $ git push origin master
 \end{columns}
 \end{frame}
 
-
 \begin{frame}[fragile]{The scenario we've just seen}
-    \begin{columns}
+\begin{columns}
 \begin{column}{0.6\textwidth}
 	\tiny
 	\begin{enumerate}
@@ -316,17 +315,67 @@ $ git push origin master
 	\end{center}
 }
 \end{frame}
-\begin{frame}[fragile]{Publishing the branch on origin}
-	\begin{lstlisting}
-$ # Push our branch 'feature' to a new branch 'feature' (will be created) on origin
-$ git push origin feature:feature |\pause|
 
-$ # From now on, to push (committed) changes we can...
-$ git push origin feature |\pause|
+\begin{frame}[fragile]{Publish the branch on origin}
+\begin{columns}
+	\begin{column}{0.6\textwidth}
+	\begin{onlyenv}<1->
+	\begin{lstlisting}
+$ # Push our branch 'feature' to a new branch 'feature' 
+$ # (will be created) on origin
+$ git push origin feature:feature
 	\end{lstlisting}
+	\end{onlyenv}
+	\begin{onlyenv}<3->
+	\begin{lstlisting}
+$ # From now on, to push (committed) changes we can...
+$ git push origin feature
+	\end{lstlisting}
+	\end{onlyenv}
+	\end{column}
+	\begin{column}{0.4\textwidth}
+		\begin{center}
+			\only<1> {
+				\includegraphics[width=0.9\textwidth]{multiuser_local_branch.png}
+			}\only<2> {
+				\includegraphics[width=0.9\textwidth]{multiuser_remote_branch.png}
+			}\only<3> {
+				\includegraphics[width=0.9\textwidth]{multiuser_push_branch.png}
+			}
+		\end{center}
+	\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Getting updates from origin}
+\begin{frame}[fragile]{Join someone else's branch}
+\begin{columns}
+	\begin{column}{0.6\textwidth}
+	\begin{lstlisting}
+$ git checkout --track -b bug origin/bug
+Branch bug set up to track remote branch 
+	refs/remotes/origin/bug.
+Switched to a new branch "bug"
+	\end{lstlisting}
+	\visible<2->{
+	\begin{tiny}
+	{\color{eclipsePurple} Beware:} \textit{pull origin bug} would have merged the changes from the remote branch \textit{bug} into our current local branch!
+	\end{tiny}
+	}
+	\end{column}
+	\begin{column}{0.4\textwidth}
+		\begin{center}
+			\includegraphics[width=0.9\textwidth]{multiuser_track.png}
+		\end{center}
+	\end{column}
+\end{columns}
+\end{frame}
+
+\setbeamercovered{transparent=0}
+
+\begin{frame}[fragile]{Get updates from origin}
+\begin{columns}
+	\begin{column}{0.6\textwidth}
+	\begin{onlyenv}<2->
 	\begin{lstlisting}
 $ # Pull updates from origin
 $ git pull |\pause|
@@ -349,23 +398,23 @@ $ git config branch.feature.merge feature
 $ # ...so that from now on, we can pull just by...
 $ git pull
 	\end{lstlisting}
-\end{frame}
-
-
-\begin{frame}[fragile]{Joining someone else's branch}
-	\begin{lstlisting}
-$ git checkout --track -b bug origin/bug
-Branch bug set up to track remote branch refs/remotes/origin/bug.
-Switched to a new branch "bug"
-	\end{lstlisting}
-	
-	\pause
-	\begin{tiny}
-	{\color{eclipsePurple} Beware:} \textit{pull origin bug} would have merged the changes from the remote branch \textit{bug} into our current local branch!
-\end{tiny}
+	\end{onlyenv}
+	\end{column}
+	\begin{column}{0.4\textwidth}
+		\begin{center}
+			\only<1-2> {
+				\includegraphics[width=0.9\textwidth]{multiuser_they_push.png}
+			}\only<3-> {
+				\includegraphics[width=0.9\textwidth]{multiuser_pull.png}
+			}
+		\end{center}
+	\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Update the master}
+\begin{columns}
+	\begin{column}{0.6\textwidth}
   	\begin{lstlisting}
 $ # Switch to master
 $ git checkout master
@@ -374,19 +423,28 @@ Switched to branch "master" |\pause|
 $ # Merge
 $ git merge feature |\pause|
 
-
-$ # Note that if the feature only existed locally, 
-$ # we could have used rebase instead of merge:
-$ git rebase feature |\pause|
-
-
 $ # Do not forget to push
 $ git push
 	\end{lstlisting}
+	\end{column}
+	\begin{column}{0.4\textwidth}
+		\begin{center}
+			\only<1> {
+				\includegraphics[width=0.9\textwidth]{multiuser_my_many_commits_pushed.png}
+			}\only<2> {
+				\includegraphics[width=0.9\textwidth]{multiuser_my_merge.png}
+			}\only<3-> {
+				\includegraphics[width=0.9\textwidth]{multiuser_remote_merge.png}
+			}
+		\end{center}
+	\end{column}
+\end{columns}
 \end{frame}
 
 
 \begin{frame}[fragile]{Remove the branch}
+\begin{columns}
+	\begin{column}{0.6\textwidth}
   	\begin{lstlisting}
 $ # Remove local branch feature
 $ git branch -d feature
@@ -397,26 +455,65 @@ $ # Remove remote branch feature
 $ git push origin :feature
 - [deleted] feature
 	\end{lstlisting}
+	\end{column}
+	\begin{column}{0.4\textwidth}
+		\begin{center}
+			\only<1> {
+				\includegraphics[width=0.9\textwidth]{multiuser_my_delete.png}
+			}\only<2> {
+				\includegraphics[width=0.9\textwidth]{multiuser_remote_delete.png}
+			}
+		\end{center}
+	\end{column}
+\end{columns}
 \end{frame}
 
+\setbeamercovered{transparent=30}
 
 \begin{frame}[fragile]{The scenario we've just seen}
+\begin{columns}
+\begin{column}{0.6\textwidth}
+	\tiny
 	\begin{enumerate}
-		\item Created a new branch locally \textbf{and published it on the remote origin}
-		\item Implemented a new feature/Fixed a bug
+		\item<1-2> Created a new branch locally \textbf{and published it on the remote origin}
+		\item<3-4> Implemented a new feature/Fixed a bug
 		\begin{enumerate}
-			\item Step 1 towards new feature/bug fix
-			\item Commit \textbf{(and maybe push to origin)}
-			\item \ldots
-			\item \textbf{Pull other developers' changes from origin}
-			\item \ldots
+			\tiny
+			\item<3> Step 1 towards new feature/bug fix
+			\item<3> Commit \textbf{(and maybe push to origin)}
+			\item<3> \ldots
+			\item<4> \textbf{Pull other developers' changes from origin}
+			\item<4> \ldots
 		\end{enumerate}
-		\item \textbf{Merged} this branch with the master \textbf{locally}
-		\item \textbf{Pushed changes to origin}
-		\item Deleted this branch locally \textbf{and on origin}
+		\item<5> \textbf{Merged} this branch with the master \textbf{locally}
+		\item<6> \textbf{Pushed changes to origin}
+		\item<7-> Deleted this branch locally \textbf{and on origin}
 	\end{enumerate}
-	\pause
-	\textit{What if I want to work in several branches in parallel?}
+\end{column}
+\begin{column}{0.4\textwidth}
+	\begin{center}
+			\only<1> {
+				\includegraphics[width=0.9\textwidth]{multiuser_local_branch}
+			}\only<2> {
+				\includegraphics[width=0.9\textwidth]{multiuser_remote_branch}
+			}\only<3> {
+				\includegraphics[width=0.9\textwidth]{multiuser_push_branch}
+			}\only<4> {
+				\includegraphics[width=0.9\textwidth]{multiuser_pull.png}
+			}\only<5> {
+				\includegraphics[width=0.9\textwidth]{multiuser_my_merge.png}
+			}\only<6> {
+				\includegraphics[width=0.9\textwidth]{multiuser_remote_merge.png}
+			}\only<7> {
+				\includegraphics[width=0.9\textwidth]{multiuser_my_delete.png}
+			}\only<8> {
+				\includegraphics[width=0.9\textwidth]{multiuser_remote_delete.png}
+			}
+	\end{center}
+\end{column}
+\end{columns}
+%	\pause
+%	\textit{What if I want to work in several branches in parallel?}
 \end{frame}
 
 \begin{frame}[fragile]{Working in several branches in parallel}
