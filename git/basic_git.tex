@@ -1,11 +1,9 @@
 \graphicspath{{images/}}
 
-\setbeamercovered{transparent=30}
 
 \begin{frame}[fragile]{The central and local repository}
   \includegraphics[height=0.9\textheight, width=\textwidth]{images/distributed}
 \end{frame}
-
 
 
 \begin{frame}[fragile]{Configuration}
@@ -18,20 +16,18 @@ $ git config --global color.branch "auto"
 	\end{lstlisting}
 \end{frame}
 
+\setbeamercovered{transparent=0}
 
 \begin{frame}[fragile]{Create/Clone a repository}
 	\begin{columns}
 		\begin{column}{0.6\textwidth}
 			\begin{lstlisting}
 $ # Create a local repository in the current folder
-$ git init
-			\end{lstlisting}
-\begin{onlyenv}<2>
-			\begin{lstlisting}
+$ git init |\pause|
+
 $ # or clone a remote repository
 $ git clone https://github.com/C3BI-pasteur-fr/tutorials.git
 			\end{lstlisting}
-\end{onlyenv}
 		\end{column}
 		\begin{column}{0.4\textwidth}
 			\begin{center}
@@ -50,15 +46,14 @@ $ git clone https://github.com/C3BI-pasteur-fr/tutorials.git
 	\begin{columns}
 		\begin{column}{0.6\textwidth}
 			\begin{lstlisting}
+|\pause|
 $ # Create a file
-$ touch README.txt
-			\end{lstlisting}
-			\begin{onlyenv}<2->
-			\begin{lstlisting}
-$ # Add files to index (to-be-committed)
-$ git add README.txt
+$ touch README.txt  |\pause|
 
-$ # Look at the current index state
+$ # Add files to index (to be committed)
+$ git add README.txt |\pause|
+
+$ # Look at the current index state 
 $ git status
 On branch master
 
@@ -67,39 +62,27 @@ Initial commit
 Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
 
-	new file:   README.txt
-
-
-			\end{lstlisting}
-			\end{onlyenv}
-			\begin{onlyenv}<3->
-			\begin{lstlisting}
+	new file:   README.txt |\pause|
 
 $ # Commit (to our local repository!)
 $ git commit README.txt -m "Added README file"
 [master (root-commit) b84669e] Added README file
  1 file changed, 0 insertions(+), 0 deletions(-)
- create mode 100644 README.txt
-
-			\end{lstlisting}
-			\end{onlyenv}
-			
-			\begin{onlyenv}<4->
-			\begin{lstlisting}
+ create mode 100644 README.txt |\pause|
+ 
 $ # Push to the remote server
 $ git push 
 			\end{lstlisting}
-			\end{onlyenv}
 		\end{column}
 		\begin{column}{0.4\textwidth}
 			\begin{center}
 				\only<1> {
 					\includegraphics[width=0.9\textwidth]{empty.png}
-				}\only<2> {
+				}\only<2-4> {
 					\includegraphics[width=0.9\textwidth]{touch.png}
-				}\only<3> {
+				}\only<5> {
 					\includegraphics[width=0.9\textwidth]{commit.png}
-				}\only<4> {
+				}\only<6> {
 					\includegraphics[width=0.9\textwidth]{push.png}
 				}
 			\end{center}
@@ -107,16 +90,16 @@ $ git push
 	\end{columns}
 \end{frame}
 
+
 %\begin{frame}
 %\includegraphics[height=0.9\textheight, width=\textwidth]{images/git_commit}
 %\end{frame}
 
 
-%\section{Working together: branching}
-
 \begin{frame}{Everything is a branch!}
 	\includegraphics[height=0.9\textheight, width=\textwidth]{gitflow}
 \end{frame}
+
 
 \begin{frame}[fragile]{Implement a new feature/Fix a bug}
 \begin{columns}
@@ -145,6 +128,7 @@ $ git push
 \end{columns}
 \end{frame}
 
+
 \begin{frame}[fragile]{Step 1. Create a new branch locally}
 \begin{columns}
 	\begin{column}{0.6\textwidth}
@@ -154,10 +138,8 @@ $ git branch -a
 * master
 remotes/origin/HEAD -> origin/master
 remotes/origin/master
-remotes/origin/services 
-	\end{lstlisting}
-	\begin{onlyenv}<2->
-	\begin{lstlisting}
+remotes/origin/services |\pause|
+
 $ # Create a branch for our feature/bug fix...
 $ git branch feature
 $ # ... and switch to this branch
@@ -168,7 +150,6 @@ $ # or create + switch in one command
 $ git checkout -b feature 
 Switched to a new branch "feature"
   	\end{lstlisting}
-  	\end{onlyenv}
   	\end{column}
 	\begin{column}{0.4\textwidth}
 		\begin{center}
@@ -182,12 +163,13 @@ Switched to a new branch "feature"
 \end{columns}
 \end{frame}
 
+
 \begin{frame}[fragile]{Step 2. Implement a new feature/Fix a bug}
 \begin{columns}
 	\begin{column}{0.6\textwidth}
 	\begin{lstlisting}
 $ # Add files to index (to-be-committed)
-$ git add main.py __init__.py 
+$ git add main.py __init__.py |\pause|
 
 $ # Look at current index state
 $ git status
@@ -202,21 +184,26 @@ Changes not staged for commit:
   (use "git checkout -- <file>..." 
 	to discard changes in working directory)
 
-	modified:   __init__.py 
+	modified:   __init__.py |\pause|
 
 $ # Commit (to our local repository!)
 $ git commit -m "Fixed TSS positions on - strand"
 [feature fd07832] Fixed TSS positions on - strand
- 1 file changed, 1 insertion(+)
+ 1 file changed, 1 insertion(+) 
   	\end{lstlisting}
   	\end{column}
 	\begin{column}{0.4\textwidth}
 		\begin{center}
-			\includegraphics[width=0.9\textwidth]{branch_commit.png}
+			\only<1-2> {
+				\includegraphics[width=0.9\textwidth]{branch_created.png}
+			} \only<3-> {
+				\includegraphics[width=0.9\textwidth]{branch_commit.png}
+			}
 		\end{center}
 	\end{column}
 \end{columns}
 \end{frame}
+
 
 \begin{frame}[fragile]{Steps 3-4. Update the master and delete the branch}
 \begin{columns}
@@ -224,29 +211,20 @@ $ git commit -m "Fixed TSS positions on - strand"
   	\begin{lstlisting}
 # Switch to master
 $ git checkout master
-Switched to branch 'master' 
-	\end{lstlisting}
-	\begin{onlyenv}<2->
-	\begin{lstlisting}
+Switched to branch 'master' |\pause|
+
 $ # Reapply our commits on the master branch
 $ git rebase feature
 First, rewinding head to replay your work on top of it...
-Fast-forwarded master to feature.
-	\end{lstlisting}
-	\end{onlyenv}
-	\begin{onlyenv}<3->
-	\begin{lstlisting}
+Fast-forwarded master to feature. |\pause|
+
 $ # Delete local branch
 $ git branch -d feature
-Deleted branch feature (was fd86490).
-	\end{lstlisting}
-	\end{onlyenv}
-	\begin{onlyenv}<4->
-	\begin{lstlisting}
+Deleted branch feature (was fd86490). |\pause|
+
 $ # Push changes to the remote server (origin)
 $ git push origin master
 	\end{lstlisting}
-	\end{onlyenv}
 	\end{column}
 	\begin{column}{0.4\textwidth}
 		\begin{center}
@@ -263,6 +241,8 @@ $ git push origin master
 	\end{column}
 \end{columns}
 \end{frame}
+
+\setbeamercovered{transparent=30}
 
 \begin{frame}[fragile]{The scenario we've just seen}
 \begin{columns}
@@ -316,22 +296,20 @@ $ git push origin master
 }
 \end{frame}
 
+\setbeamercovered{transparent=0}
+
 \begin{frame}[fragile]{Publish the branch on origin}
 \begin{columns}
 	\begin{column}{0.6\textwidth}
-	\begin{onlyenv}<1->
 	\begin{lstlisting}
+	|\pause|
 $ # Push our branch 'feature' to a new branch 'feature' 
 $ # (will be created) on origin
-$ git push origin feature:feature
-	\end{lstlisting}
-	\end{onlyenv}
-	\begin{onlyenv}<3->
-	\begin{lstlisting}
+$ git push origin feature:feature |\pause|
+
 $ # From now on, to push (committed) changes we can...
 $ git push origin feature
 	\end{lstlisting}
-	\end{onlyenv}
 	\end{column}
 	\begin{column}{0.4\textwidth}
 		\begin{center}
@@ -346,6 +324,7 @@ $ git push origin feature
 	\end{column}
 \end{columns}
 \end{frame}
+
 
 \begin{frame}[fragile]{Join someone else's branch}
 \begin{columns}
@@ -370,12 +349,10 @@ Switched to a new branch "bug"
 \end{columns}
 \end{frame}
 
-\setbeamercovered{transparent=0}
 
 \begin{frame}[fragile]{Get updates from origin}
 \begin{columns}
 	\begin{column}{0.6\textwidth}
-	\begin{onlyenv}<2->
 	\begin{lstlisting}
 $ # Pull updates from origin
 $ git pull |\pause|
@@ -398,7 +375,6 @@ $ git config branch.feature.merge feature
 $ # ...so that from now on, we can pull just by...
 $ git pull
 	\end{lstlisting}
-	\end{onlyenv}
 	\end{column}
 	\begin{column}{0.4\textwidth}
 		\begin{center}
@@ -411,6 +387,7 @@ $ git pull
 	\end{column}
 \end{columns}
 \end{frame}
+
 
 \begin{frame}[fragile]{Update the master}
 \begin{columns}
@@ -516,55 +493,6 @@ $ git push origin :feature
 %	\textit{What if I want to work in several branches in parallel?}
 \end{frame}
 
-\begin{frame}[fragile]{Working in several branches in parallel}
-	\begin{tiny}
-		\begin{lstlisting}
-$ # On branch A: did some changes, but not yet ready to commit...
-$ # Want to switch to branch B. |\pause| Checkout?
-$ git checkout master
-error: Your local changes to the following files would be overwritten by checkout:
-	main/basic_git.tex
-Please, commit your changes or stash them before you can switch branches.
-Aborting |\pause|
-
-$ # Save the changes first.
-$ git stash
-Saved working directory and index state WIP on basic_git: 30fb6e8 Fixed typos
-HEAD is now at 30fb6e8 Fixed typos |\pause|
-
-$ # Now we can switch to another branch and work there...
-$ git checkout master
-Switched to branch 'master'
-$ ...
-		\end{lstlisting}
-	\end{tiny}
-\end{frame}
-
-\begin{frame}[fragile]{Working in several branches in parallel}
-	\begin{tiny}
-		\begin{lstlisting}
-$ # Back on branch A: How do I get my changes back?
-$ # Which stashes are there?
-$ git stash list
-stash@{0}: WIP on master: ceef0bd Merge pull request #1 from C3BI-pasteur-fr/services
-stash@{1}: WIP on basic_git: 30fb6e8 Fixed typos |\pause|
-
-$ # Apply the stash
-$ git stash apply stash@{1}
-On branch basic_git
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
-	modified:   basic_git.tex
-	... |\pause|
-	
-$ # Remove this stash from stash list
-$ git stash drop stash@{1}
-Dropped stash@{1} (739c015cafdc37e22a45d97868c3d03bc940eadf)
-		\end{lstlisting}
-	\end{tiny}
-\end{frame}
 
 \begin{frame}{Summary}
 	\begin{tiny}
@@ -585,10 +513,10 @@ Dropped stash@{1} (739c015cafdc37e22a45d97868c3d03bc940eadf)
         \item[]
         \item[] {\color{eclipseBlue}git merge <branch>} -- merge the selected branch into the current branch
         \item[] {\color{eclipseBlue}git rebase <branch>} -- reapply commits from the branch on top of the current branch
-        \item[]
-        \item[] {\color{eclipseBlue}git stash} -- record the current state of the working directory and the index, and clean the working directory
-        \item[] {\color{eclipseBlue}git stash list} -- list the stashes that currently exist
-        \item[] {\color{eclipseBlue}git stash apply <stash>} -- return to the state recorded in this stash
+%        \item[]
+%        \item[] {\color{eclipseBlue}git stash} -- record the current state of the working directory and the index, and clean the working directory
+%        \item[] {\color{eclipseBlue}git stash list} -- list the stashes that currently exist
+%        \item[] {\color{eclipseBlue}git stash apply <stash>} -- return to the state recorded in this stash
         \item[]
         \item[] {\color{eclipseBlue}git log [-{}-graph]} -- see commit logs
         \item[]

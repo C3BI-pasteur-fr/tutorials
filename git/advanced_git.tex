@@ -1,0 +1,49 @@
+\begin{frame}[fragile]{Working in several branches in parallel}
+	\begin{tiny}
+		\begin{lstlisting}
+$ # On branch A: did some changes, but not yet ready to commit...
+$ # Want to switch to branch B. |\pause| Checkout?
+$ git checkout master
+error: Your local changes to the following files would be overwritten by checkout:
+	main/basic_git.tex
+Please, commit your changes or stash them before you can switch branches.
+Aborting |\pause|
+
+$ # Save the changes first.
+$ git stash
+Saved working directory and index state WIP on basic_git: 30fb6e8 Fixed typos
+HEAD is now at 30fb6e8 Fixed typos |\pause|
+
+$ # Now we can switch to another branch and work there...
+$ git checkout master
+Switched to branch 'master'
+$ ...
+		\end{lstlisting}
+	\end{tiny}
+\end{frame}
+
+\begin{frame}[fragile]{Working in several branches in parallel}
+	\begin{tiny}
+		\begin{lstlisting}
+$ # Back on branch A: How do I get my changes back?
+$ # Which stashes are there?
+$ git stash list
+stash@{0}: WIP on master: ceef0bd Merge pull request #1 from C3BI-pasteur-fr/services
+stash@{1}: WIP on basic_git: 30fb6e8 Fixed typos |\pause|
+
+$ # Apply the stash
+$ git stash apply stash@{1}
+On branch basic_git
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   basic_git.tex
+	... |\pause|
+	
+$ # Remove this stash from stash list
+$ git stash drop stash@{1}
+Dropped stash@{1} (739c015cafdc37e22a45d97868c3d03bc940eadf)
+		\end{lstlisting}
+	\end{tiny}
+\end{frame}
