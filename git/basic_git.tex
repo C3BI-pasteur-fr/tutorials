@@ -1,4 +1,5 @@
-
+\graphicspath{{images/}}
+\setbeamercovered{transparent=30}
 
 \begin{frame}[fragile]{The central and local repository}
   \includegraphics[height=0.9\textheight, width=\textwidth]{images/distributed}
@@ -7,8 +8,6 @@
 
 
 \begin{frame}[fragile]{Configuration}
-Before starting to use git, you may want to configure it as follows:
-
 	\begin{lstlisting}
 $ git config --global user.name "First Last"
 $ git config --global user.email "email@example.com"
@@ -18,63 +17,115 @@ $ git config --global color.branch "auto"
 	\end{lstlisting}
 \end{frame}
 
-\begin{frame}[fragile]{Create/Clone a repository}
-	\begin{lstlisting}
-$ # Clone a remote repository
-$ git clone https://github.com/C3BI-pasteur-fr/tutorials.git |\pause|
 
-$ # or create a local repository in the current folder
+\begin{frame}[fragile]{Create/Clone a repository}
+	\begin{columns}
+		\begin{column}{0.6\textwidth}
+			\begin{lstlisting}
+$ # Create a local repository in the current folder
 $ git init
-	\end{lstlisting}
+			\end{lstlisting}
+\begin{onlyenv}<2>
+			\begin{lstlisting}
+$ # or clone a remote repository
+$ git clone https://github.com/C3BI-pasteur-fr/tutorials.git
+			\end{lstlisting}
+\end{onlyenv}
+		\end{column}
+		\begin{column}{0.4\textwidth}
+			\begin{center}
+				\only<1> {
+					\includegraphics[width=0.9\textwidth]{init.png}
+				}\only<2> {
+					\includegraphics[width=0.9\textwidth]{clone.png}
+				}
+			\end{center}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 
+\begin{frame}[fragile]{First steps}
+	\begin{columns}
+		\begin{column}{0.6\textwidth}
+			\begin{lstlisting}
+$ # Create a file
+$ touch README.txt
+			\end{lstlisting}
+			\begin{onlyenv}<2->
+			\begin{lstlisting}
+$ # Add files to index (to-be-committed)
+$ git add README.txt
+
+$ # Look at the current index state
+$ git status
+On branch master
+
+Initial commit
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+	new file:   README.txt
 
 
-%\begin{frame}[fragile]{Add a new file on the remote repository}
-%\begin{lstlisting}
-%$ # create your file
-%$ touch README.rst
-%
-%$ Check the status of your repo
-%$ git status
-%
-%$ # add it to your local repository
-%$ git add README.rst
-%
-%$ Check the status 
-%$ git status
-%
-%$ # commit to your local repository
-%$ git commit README.rst -m "Meaningful message"
-%
-%$ Check the status 
-%$ git status
-%
-%$ # Send to the server for everybody
-%$ git push 
-%
-%$ Check the status 
-%$ git status
-%\end{lstlisting}
-%\end{frame}
+			\end{lstlisting}
+			\end{onlyenv}
+			\begin{onlyenv}<3->
+			\begin{lstlisting}
+
+$ # Commit (to our local repository!)
+$ git commit README.txt -m "Added README file"
+[master (root-commit) b84669e] Added README file
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 README.txt
+
+			\end{lstlisting}
+			\end{onlyenv}
+			
+			\begin{onlyenv}<4->
+			\begin{lstlisting}
+$ # Push to the remote server
+$ git push 
+			\end{lstlisting}
+			\end{onlyenv}
+		\end{column}
+		\begin{column}{0.4\textwidth}
+			\begin{center}
+				\only<1> {
+					\includegraphics[width=0.9\textwidth]{empty.png}
+				}\only<2> {
+					\includegraphics[width=0.9\textwidth]{touch.png}
+				}\only<3> {
+					\includegraphics[width=0.9\textwidth]{commit.png}
+				}\only<4> {
+					\includegraphics[width=0.9\textwidth]{push.png}
+				}
+			\end{center}
+		\end{column}
+	\end{columns}
+\end{frame}
 
 %\begin{frame}
 %\includegraphics[height=0.9\textheight, width=\textwidth]{images/git_commit}
 %\end{frame}
 
 
-\section{Working together: branching}
+%\section{Working together: branching}
 
 \begin{frame}
-\includegraphics[height=0.9\textheight, width=\textwidth]{images/gitflow}
+\includegraphics[height=0.9\textheight, width=\textwidth]{gitflow}
 \end{frame}
 
-\begin{frame}[fragile]{Write a new feature/bug fix}
+\begin{frame}[fragile]{Implement a new feature/Fix a bug}
+\begin{columns}
+	\begin{column}{0.6\textwidth}
+	\small
 	\begin{enumerate}
 		\item Create a new branch
 		\item Implement a new feature/Fix a bug
 		\begin{enumerate}
+			\tiny
 			\item Step 1 towards new feature/bug fix
 			\item Commit
 			\item Step 2 towards new feature/bug fix
@@ -84,17 +135,28 @@ $ git init
 		\item Update the master
 		\item Delete this branch 
 	\end{enumerate}
+	\end{column}
+	\begin{column}{0.4\textwidth}
+		\begin{center}
+			\includegraphics[width=0.9\textwidth]{branch.png}
+		\end{center}
+	\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Step 1. Create a new branch locally}
+\begin{columns}
+	\begin{column}{0.6\textwidth}
 	\begin{lstlisting}
 $ # Which branches do we have?
-$ git branch -a |\pause|
+$ git branch -a
 * master
 remotes/origin/HEAD -> origin/master
 remotes/origin/master
-remotes/origin/services |\pause|
-
+remotes/origin/services 
+	\end{lstlisting}
+	\begin{onlyenv}<2->
+	\begin{lstlisting}
 $ # Create a branch for our feature/bug fix...
 $ git branch feature
 $ # ... and switch to this branch
@@ -105,15 +167,26 @@ $ # or create + switch in one command
 $ git checkout -b feature 
 Switched to a new branch "feature"
   	\end{lstlisting}
+  	\end{onlyenv}
+  	\end{column}
+	\begin{column}{0.4\textwidth}
+		\begin{center}
+			\only<1> {
+				\includegraphics[width=0.9\textwidth]{branch_a.png}
+			} \only<2-> {
+				\includegraphics[width=0.9\textwidth]{branch_created.png}
+			}
+		\end{center}
+	\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Step 2. Implement a new feature/Fix a bug}
-  	\begin{lstlisting}
+\begin{columns}
+	\begin{column}{0.6\textwidth}
+	\begin{lstlisting}
 $ # Add files to index (to-be-committed)
-$ git add main.py __init__.py |\pause|
-
-$ # Remove files from index
-$ git reset HEAD __init__.py |\pause|
+$ git add main.py __init__.py 
 
 $ # Look at current index state
 $ git status
@@ -125,73 +198,124 @@ Changes to be committed:
 
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
+  (use "git checkout -- <file>..." 
+	to discard changes in working directory)
 
-	modified:   __init__.py |\pause|
+	modified:   __init__.py 
 
-$ # Commit (in our local repository!)
+$ # Commit (to our local repository!)
 $ git commit -m "Fixed TSS positions on - strand"
 [feature fd07832] Fixed TSS positions on - strand
  1 file changed, 1 insertion(+)
   	\end{lstlisting}
+  	\end{column}
+	\begin{column}{0.4\textwidth}
+		\begin{center}
+			\includegraphics[width=0.9\textwidth]{branch_commit.png}
+		\end{center}
+	\end{column}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}[fragile]{Step 3. Update the master}
+\begin{frame}[fragile]{Steps 3-4. Update the master and delete the branch}
+\begin{columns}
+	\begin{column}{0.6\textwidth}
   	\begin{lstlisting}
 # Switch to master
 $ git checkout master
-Switched to branch 'master' |\pause|
-
-
+Switched to branch 'master' 
+	\end{lstlisting}
+	\begin{onlyenv}<2->
+	\begin{lstlisting}
 $ # Reapply our commits on the master branch
 $ git rebase feature
 First, rewinding head to replay your work on top of it...
 Fast-forwarded master to feature.
 	\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Step 4. Remove the branch}
-  	\begin{lstlisting}
-$ # Remove local branch
+	\end{onlyenv}
+	\begin{onlyenv}<3->
+	\begin{lstlisting}
+$ # Delete local branch
 $ git branch -d feature
-Deleted branch feature (was fd86490). |\pause|
+Deleted branch feature (was fd86490).
 	\end{lstlisting}
+	\end{onlyenv}
+	\begin{onlyenv}<4->
+	\begin{lstlisting}
+$ # Push changes to the remote server (origin)
+$ git push origin master
+	\end{lstlisting}
+	\end{onlyenv}
+	\end{column}
+	\begin{column}{0.4\textwidth}
+		\begin{center}
+			\only<1> {
+				\includegraphics[width=0.9\textwidth]{branch_committed.png}
+			}\only<2> {
+				\includegraphics[width=0.9\textwidth]{branch_rebase.png}
+			}\only<3> {
+				\includegraphics[width=0.9\textwidth]{branch_delete.png}
+			}\only<4> {
+				\includegraphics[width=0.9\textwidth]{branch_pushed.png}
+			}
+		\end{center}
+	\end{column}
+\end{columns}
 \end{frame}
 
 
 \begin{frame}[fragile]{The scenario we've just seen}
     \begin{columns}
 \begin{column}{0.6\textwidth}
-\small
+	\tiny
 	\begin{enumerate}
-		\item Created a new branch \textbf{locally}
-		\item Implemented a new feature/bug fix
+		\item<2> Created a new branch \textbf{locally}
+		\item<3-4> Implemented a new feature/bug fix
 		\begin{enumerate}
-			\item Step 1 towards new feature
-			\item Commit
-			\item Step 2 towards bug fix
-			\item Commit
-			\item \ldots
+			\tiny
+			\item<3> Step 1 towards new feature
+			\item<3> Commit
+			\item<4> Step 2 towards bug fix
+			\item<4> Commit
+			\item<4> \ldots
 		\end{enumerate}
-		\item \textbf{Reapplied} the commits from this branch on the master \textbf{locally}
-		\item Deleted this branch \textbf{locally} (it never existed elsewhere)
-		
-		\item Push changes to the remote server (origin)
-		\begin{lstlisting}
-		$ git push origin master
-		\end{lstlisting}
+		\item<5> \textbf{Reapplied} the commits from this branch on the master \textbf{locally}
+		\item<6> Deleted this branch \textbf{locally} (it never existed elsewhere)
+		\item<7> Pushed changes to the remote server (origin)
 	\end{enumerate}
 \end{column}
-\begin{column}{0.9\textwidth}
-\includegraphics[height=0.7\textheight, width=0.6\textwidth]{images/gitflow}
+\begin{column}{0.4\textwidth}
+	\begin{center}
+			\only<1> {
+				\includegraphics[width=0.9\textwidth]{branch_a.png}
+			}\only<2> {
+				\includegraphics[width=0.9\textwidth]{branch_created.png}
+			}\only<3> {
+				\includegraphics[width=0.9\textwidth]{branch_commit.png}
+			}\only<4> {
+				\includegraphics[width=0.9\textwidth]{branch_committed.png}
+			}\only<5> {
+				\includegraphics[width=0.9\textwidth]{branch_rebase.png}
+			}\only<6> {
+				\includegraphics[width=0.9\textwidth]{branch_delete.png}
+			}\only<7> {
+				\includegraphics[width=0.9\textwidth]{branch_pushed.png}
+			}\only<8> {
+				\includegraphics[width=0.9\textwidth]{branch_many.png}
+			}
+	\end{center}
 \end{column}
 \end{columns}
 
-	\pause
+\visible<8>{
+	\begin{center}
+	
+	\tiny
 	\textit{What if I am not the only one working on this feature/bug?}
+	\end{center}
+}
 \end{frame}
-
 \begin{frame}[fragile]{Publishing the branch on origin}
 	\begin{lstlisting}
 $ # Push our branch 'feature' to a new branch 'feature' (will be created) on origin
