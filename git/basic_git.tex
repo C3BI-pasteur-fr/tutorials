@@ -1,5 +1,12 @@
-\begin{frame}[fragile]{Configuration}
 
+
+\begin{frame}[fragile]{The central and local repository}
+  \includegraphics[height=0.9\textheight, width=\textwidth]{images/distributed}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Configuration}
 Before starting to use git, you may want to configure it as follows:
 
 	\begin{lstlisting}
@@ -22,45 +29,46 @@ $ git init
 \end{frame}
 
 
-\begin{frame}
-include image showing again you, the local repo and the server ?
-\end{frame}
 
 
-\begin{frame}[fragile]{Add a new file on the remote repository}
-\begin{lstlisting}
-$ # create your file
-$ touch README.rst
+%\begin{frame}[fragile]{Add a new file on the remote repository}
+%\begin{lstlisting}
+%$ # create your file
+%$ touch README.rst
+%
+%$ Check the status of your repo
+%$ git status
+%
+%$ # add it to your local repository
+%$ git add README.rst
+%
+%$ Check the status 
+%$ git status
+%
+%$ # commit to your local repository
+%$ git commit README.rst -m "Meaningful message"
+%
+%$ Check the status 
+%$ git status
+%
+%$ # Send to the server for everybody
+%$ git push 
+%
+%$ Check the status 
+%$ git status
+%\end{lstlisting}
+%\end{frame}
 
-$ Check the status of your repo
-$ git status
-
-$ # add it to your local repository
-$ git add README.rst
-
-$ Check the status 
-$ git status
-
-$ # commit to your local repository
-$ git commit README.rst -m "Meaningful message"
-
-$ Check the status 
-$ git status
-
-$ # Send to the server for everybody
-$ git push 
-
-$ Check the status 
-$ git status
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}
-\includegraphics[height=0.9\textheight, width=\textwidth]{images/git_commit}
-\end{frame}
+%\begin{frame}
+%\includegraphics[height=0.9\textheight, width=\textwidth]{images/git_commit}
+%\end{frame}
 
 
 \section{Working together: branching}
+
+\begin{frame}
+\includegraphics[height=0.9\textheight, width=\textwidth]{images/gitflow}
+\end{frame}
 
 \begin{frame}[fragile]{Write a new feature/bug fix}
 	\begin{enumerate}
@@ -153,24 +161,33 @@ Deleted branch feature (was fd86490). |\pause|
 
 
 \begin{frame}[fragile]{The scenario we've just seen}
+    \begin{columns}
+\begin{column}{0.6\textwidth}
+\small
 	\begin{enumerate}
 		\item Created a new branch \textbf{locally}
-		\item Implemented a new feature/Fixed a bug
+		\item Implemented a new feature/bug fix
 		\begin{enumerate}
-			\item Step 1 towards new feature/bug fix
+			\item Step 1 towards new feature
 			\item Commit
-			\item Step 2 towards new feature/bug fix
+			\item Step 2 towards bug fix
 			\item Commit
 			\item \ldots
 		\end{enumerate}
 		\item \textbf{Reapplied} the commits from this branch on the master \textbf{locally}
 		\item Deleted this branch \textbf{locally} (it never existed elsewhere)
-		\pause
+		
 		\item Push changes to the remote server (origin)
 		\begin{lstlisting}
 		$ git push origin master
 		\end{lstlisting}
 	\end{enumerate}
+\end{column}
+\begin{column}{0.9\textwidth}
+\includegraphics[height=0.7\textheight, width=0.6\textwidth]{images/gitflow}
+\end{column}
+\end{columns}
+
 	\pause
 	\textit{What if I am not the only one working on this feature/bug?}
 \end{frame}
