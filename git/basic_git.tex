@@ -100,6 +100,7 @@ $ git push
 	\includegraphics[height=0.9\textheight, width=\textwidth]{gitflow}
 \end{frame}
 
+\subsection{One-user case}
 
 \begin{frame}[fragile]{Implement a new feature/Fix a bug}
 \begin{columns}
@@ -245,6 +246,8 @@ $ git push origin master
 \setbeamercovered{transparent=30}
 
 \begin{frame}[fragile]{The scenario we've just seen}
+
+\subsection{Multiuser case}
 \begin{columns}
 \begin{column}{0.6\textwidth}
 	\tiny
@@ -300,25 +303,26 @@ $ git push origin master
 
 \begin{frame}[fragile]{Publish the branch on origin}
 \begin{columns}
-	\begin{column}{0.6\textwidth}
+	\begin{column}{0.4\textwidth}
 	\begin{lstlisting}
 	|\pause|
-$ # Push our branch 'feature' to a new branch 'feature' 
+$ # Push our branch 'feature' 
+$ # to a new branch 'feature' 
 $ # (will be created) on origin
 $ git push origin feature:feature |\pause|
 
-$ # From now on, to push (committed) changes we can...
+$ # From now on, to push (committed) changes...
 $ git push origin feature
 	\end{lstlisting}
 	\end{column}
-	\begin{column}{0.4\textwidth}
+	\begin{column}{0.6\textwidth}
 		\begin{center}
 			\only<1> {
-				\includegraphics[width=0.9\textwidth]{multiuser_local_branch.png}
+				\includegraphics[width=.9\textwidth]{multiuser_local_branch.png}
 			}\only<2> {
-				\includegraphics[width=0.9\textwidth]{multiuser_remote_branch.png}
+				\includegraphics[width=.9\textwidth]{multiuser_remote_branch.png}
 			}\only<3> {
-				\includegraphics[width=0.9\textwidth]{multiuser_push_branch.png}
+				\includegraphics[width=.9\textwidth]{multiuser_push_branch.png}
 			}
 		\end{center}
 	\end{column}
@@ -328,7 +332,7 @@ $ git push origin feature
 
 \begin{frame}[fragile]{Join someone else's branch}
 \begin{columns}
-	\begin{column}{0.6\textwidth}
+	\begin{column}{0.4\textwidth}
 	\begin{lstlisting}
 $ git checkout --track -b bug origin/bug
 Branch bug set up to track remote branch 
@@ -341,9 +345,9 @@ Switched to a new branch "bug"
 	\end{tiny}
 	}
 	\end{column}
-	\begin{column}{0.4\textwidth}
+	\begin{column}{0.6\textwidth}
 		\begin{center}
-			\includegraphics[width=0.9\textwidth]{multiuser_track.png}
+			\includegraphics[width=.9\textwidth]{multiuser_track.png}
 		\end{center}
 	\end{column}
 \end{columns}
@@ -352,7 +356,7 @@ Switched to a new branch "bug"
 
 \begin{frame}[fragile]{Get updates from origin}
 \begin{columns}
-	\begin{column}{0.6\textwidth}
+	\begin{column}{0.4\textwidth}
 	\begin{lstlisting}
 $ # Pull updates from origin
 $ git pull |\pause|
@@ -363,7 +367,8 @@ See git-pull(1) for details.
 
     git pull <remote> <branch> |\pause|
     
-$ # Pull (what?) branch feature (from where?) from origin
+$ # Pull (what?) branch feature 
+$ # (from where?) from origin
 $ git pull origin feature |\pause|
 
 $ # We can also update config...
@@ -372,16 +377,17 @@ $ git config branch.feature.remote origin
 $ # (what?)
 $ git config branch.feature.merge feature
 
-$ # ...so that from now on, we can pull just by...
+$ # ...so that from now on, 
+$ # we can pull just by...
 $ git pull
 	\end{lstlisting}
 	\end{column}
-	\begin{column}{0.4\textwidth}
+	\begin{column}{0.6\textwidth}
 		\begin{center}
 			\only<1-2> {
-				\includegraphics[width=0.9\textwidth]{multiuser_they_push.png}
+				\includegraphics[width=.9\textwidth]{multiuser_they_push.png}
 			}\only<3-> {
-				\includegraphics[width=0.9\textwidth]{multiuser_pull.png}
+				\includegraphics[width=.9\textwidth]{multiuser_pull.png}
 			}
 		\end{center}
 	\end{column}
@@ -391,7 +397,7 @@ $ git pull
 
 \begin{frame}[fragile]{Update the master}
 \begin{columns}
-	\begin{column}{0.6\textwidth}
+	\begin{column}{0.4\textwidth}
   	\begin{lstlisting}
 $ # Switch to master
 $ git checkout master
@@ -404,14 +410,14 @@ $ # Do not forget to push
 $ git push
 	\end{lstlisting}
 	\end{column}
-	\begin{column}{0.4\textwidth}
+	\begin{column}{0.6\textwidth}
 		\begin{center}
 			\only<1> {
-				\includegraphics[width=0.9\textwidth]{multiuser_my_many_commits_pushed.png}
+				\includegraphics[width=.9\textwidth]{multiuser_my_many_commits_pushed.png}
 			}\only<2> {
-				\includegraphics[width=0.9\textwidth]{multiuser_my_merge.png}
+				\includegraphics[width=.9\textwidth]{multiuser_my_merge.png}
 			}\only<3-> {
-				\includegraphics[width=0.9\textwidth]{multiuser_remote_merge.png}
+				\includegraphics[width=.9\textwidth]{multiuser_remote_merge.png}
 			}
 		\end{center}
 	\end{column}
@@ -421,7 +427,7 @@ $ git push
 
 \begin{frame}[fragile]{Remove the branch}
 \begin{columns}
-	\begin{column}{0.6\textwidth}
+	\begin{column}{0.4\textwidth}
   	\begin{lstlisting}
 $ # Remove local branch feature
 $ git branch -d feature
@@ -433,12 +439,12 @@ $ git push origin :feature
 - [deleted] feature
 	\end{lstlisting}
 	\end{column}
-	\begin{column}{0.4\textwidth}
+	\begin{column}{0.6\textwidth}
 		\begin{center}
 			\only<1> {
-				\includegraphics[width=0.9\textwidth]{multiuser_my_delete.png}
+				\includegraphics[width=.9\textwidth]{multiuser_my_delete.png}
 			}\only<2> {
-				\includegraphics[width=0.9\textwidth]{multiuser_remote_delete.png}
+				\includegraphics[width=.9\textwidth]{multiuser_remote_delete.png}
 			}
 		\end{center}
 	\end{column}
@@ -449,17 +455,17 @@ $ git push origin :feature
 
 \begin{frame}[fragile]{The scenario we've just seen}
 \begin{columns}
-\begin{column}{0.6\textwidth}
+\begin{column}{0.5\textwidth}
 	\tiny
 	\begin{enumerate}
-		\item<1-2> Created a new branch locally \textbf{and published it on the remote origin}
+		\item<1-2> Created a new branch locally \\\textbf{and published it on the remote origin}
 		\item<3-4> Implemented a new feature/Fixed a bug
 		\begin{enumerate}
 			\tiny
 			\item<3> Step 1 towards new feature/bug fix
 			\item<3> Commit \textbf{(and maybe push to origin)}
 			\item<3> \ldots
-			\item<4> \textbf{Pull other developers' changes from origin}
+			\item<4> \textbf{Pull others' changes from origin}
 			\item<4> \ldots
 		\end{enumerate}
 		\item<5> \textbf{Merged} this branch with the master \textbf{locally}
@@ -467,7 +473,7 @@ $ git push origin :feature
 		\item<7-> Deleted this branch locally \textbf{and on origin}
 	\end{enumerate}
 \end{column}
-\begin{column}{0.4\textwidth}
+\begin{column}{0.6\textwidth}
 	\begin{center}
 			\only<1> {
 				\includegraphics[width=0.9\textwidth]{multiuser_local_branch}
