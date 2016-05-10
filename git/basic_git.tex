@@ -334,14 +334,14 @@ $ git push origin feature
 \begin{columns}
 	\begin{column}{0.4\textwidth}
 	\begin{lstlisting}
-$ git checkout --track -b bug origin/bug
-Branch bug set up to track remote branch 
-	refs/remotes/origin/bug.
-Switched to a new branch "bug"
+$ git checkout --track -b feature origin/feature
+Branch feature set up to track remote branch 
+	refs/remotes/origin/feature.
+Switched to a new branch "feature"
 	\end{lstlisting}
 	\visible<2->{
 	\begin{tiny}
-	{\color{eclipsePurple} Beware:} \textit{pull origin bug} would have merged the changes from the remote branch \textit{bug} into our current local branch!
+	{\color{eclipsePurple} Beware:} \textit{pull origin feature} would have merged the changes from the remote branch \textit{feature} into our current local branch!
 	\end{tiny}
 	}
 	\end{column}
@@ -367,8 +367,8 @@ See git-pull(1) for details.
 
     git pull <remote> <branch> |\pause|
     
-$ # Pull (what?) branch feature 
-$ # (from where?) from origin
+$ # Pull (from where?) from origin
+$ # (what?) branch feature 
 $ git pull origin feature |\pause|
 
 $ # We can also update config...
