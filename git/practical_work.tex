@@ -6,24 +6,48 @@
 
 
  
-\begin{frame}{Requirement}
+\begin{frame}[fragile]{Requirements}
     \begin{enumerate}
         \item Install git
         \item Set up your git config
         \item Create an account on github
-        \item Set up your ssh-key
+        \item Set up your ssh-key to avoid passwords or use https
     \end{enumerate}
 \end{frame}
 
-\begin{frame}{Practical work 1}
+\begin{frame}[fragile]{Practical work: adding a file, get updates}
     \begin{enumerate}
-        \item Clone https://github.com/C3BI-pasteur-fr/sandbox
-        \item Create a file. Put your name for the filename
-        \item Push this file on the repository (add, commit, push)
+        \item Clone https://github.com/C3BI-pasteur-fr/sandbox using https method
+        \item Compile the Latex document (hint: there is a Makefile)
+        \item Add missing Latex input files (add, commit, push)
     \end{enumerate}
-    \begin{alertblock}<2>{Problem}
-        Every one try to add his file on the master.
+\pause
+    \begin{alertblock}<2>{Possible problem}
+        Everyone tries to add his file on the master. To work smoothly do not
+touch the slides.tex main file 
     \end{alertblock}
+
+\pause
+Now that everybody has contributed, get the new files and build the LaTex
+document again:
+    \begin{lstlisting}
+        $ git pull
+    \end{lstlisting}
 \end{frame}
 
 
+\begin{frame}[fragile]{Practical work: using branches}
+    \begin{enumerate}
+        \item Create branch
+        \item Change your file
+        \item Check the status
+        \item How different is it 
+        \item Commit and Push your results on the server
+        \item Delete your local branch
+    \end{enumerate}
+
+\end{frame}
+
+
+
+%% See materials to reproduce the sandbox in ./sandbox directory
