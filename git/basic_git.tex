@@ -5,17 +5,6 @@
 %  \includegraphics[height=0.9\textheight, width=\textwidth]{images/distributed}
 %\end{frame}
 
-
-\begin{frame}[fragile]{Configuration}
-	\begin{lstlisting}
-$ git config --global user.name "First Last"
-$ git config --global user.email "email@example.com"
-$ git config --global color.diff "auto"
-$ git config --global color.status "auto"
-$ git config --global color.branch "auto"
-	\end{lstlisting}
-\end{frame}
-
 \setbeamercovered{transparent=0}
 
 \begin{frame}[fragile]{Create/Clone a repository}
@@ -42,6 +31,17 @@ $ git clone https://github.com/C3BI-pasteur-fr/tutorials.git
 \end{frame}
 
 
+\begin{frame}[fragile]{Configuration}
+	\begin{lstlisting}
+$ git config --global user.name "First Last"
+$ git config --global user.email "email@example.com"
+$ git config --global color.diff "auto"
+$ git config --global color.status "auto"
+$ git config --global color.branch "auto"
+	\end{lstlisting}
+\end{frame}
+
+
 \begin{frame}[fragile]{First steps}
 	\begin{columns}
 		\begin{column}{0.6\textwidth}
@@ -65,7 +65,7 @@ Changes to be committed:
 	new file:   README.txt |\pause|
 
 $ # Commit (to our local repository!)
-$ git commit README.txt -m "Added README file"
+$ git commit -m "Added README file"
 [master (root-commit) b84669e] Added README file
  1 file changed, 0 insertions(+), 0 deletions(-)
  create mode 100644 README.txt |\pause|
@@ -118,7 +118,7 @@ $ git push
 			\item \ldots
 		\end{enumerate}
 		\item Update the master
-		\item Delete this branch 
+		\item Delete this branch \textit{(optional)} 
 	\end{enumerate}
 	\end{column}
 	\begin{column}{0.4\textwidth}
@@ -170,7 +170,7 @@ Switched to a new branch "feature"
 	\begin{column}{0.6\textwidth}
 	\begin{lstlisting}
 $ # Add files to index (to-be-committed)
-$ git add main.py __init__.py |\pause|
+$ git add main.py |\pause|
 
 $ # Look at current index state
 $ git status
@@ -425,16 +425,16 @@ $ git push
 \end{frame}
 
 
-\begin{frame}[fragile]{Remove the branch}
+\begin{frame}[fragile]{Delete the branch (optional)}
 \begin{columns}
 	\begin{column}{0.4\textwidth}
   	\begin{lstlisting}
-$ # Remove local branch feature
+$ # Delete local branch feature
 $ git branch -d feature
 Deleted branch feature (was fd86490). |\pause|
 
 
-$ # Remove remote branch feature
+$ # Delete remote branch feature
 $ git push origin :feature
 - [deleted] feature
 	\end{lstlisting}
